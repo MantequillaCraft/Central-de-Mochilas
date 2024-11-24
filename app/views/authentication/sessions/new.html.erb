@@ -1,0 +1,95 @@
+<style>
+  .content {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .new-sale-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input[disabled] {
+    background-color: #e9ecef;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .complete-sale-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+</style>
+
+<main class="content">
+<div class="new-sale-form">
+
+  <h1>LogIn</h1>
+    <%= form_with(url: sessions_path) do |f| %>
+
+      <% if flash[:alert] %>
+        <div class="alert" style="color: red; font-weight: bold;">
+          <%= flash[:alert] %>
+        </div>
+    <% end %>
+
+      <div>
+        <h4>Email or Username</h4> 
+        <%= f.text_field :login , placeholder: "YourUsername123" %>
+      </div>
+
+      <div>
+        <h4>Password</h4>
+        <%= f.password_field :password, placeholder: "YourPassword123" %>
+      </div>
+
+      <div>
+        <%= f.submit "Submit"%>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+

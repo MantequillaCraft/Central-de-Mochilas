@@ -1,0 +1,43 @@
+
+
+<%= form_with(model: reserve_or_purchase) do |form| %>
+  <% if reserve_or_purchase.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reserve_or_purchase.errors.count, "error") %> prohibited this reserve_or_purchase from being saved:</h2>
+
+      <ul>
+        <% reserve_or_purchase.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :product_id, style: "display: block" %>
+    <%= form.collection_select :product_id, Product.all.order(product_name: :asc), :id, :product_name %>
+  </div>
+
+  <div>
+    <%= form.label :customer_id, style: "display: block" %>
+    <%= form.collection_select :customer_id, Customer.all.order(customer_name: :asc), :id, :customer_name %>
+  </div>
+
+  <div>
+    <%= form.label :desired_quantity, style: "display: block" %>
+    <%= form.number_field :desired_quantity %>
+  </div>
+
+  <div>
+    <%= form.label :payment_method, style: "display: block" %>
+    <%= form.text_field :payment_method %>
+  </div>
+
+  <div>
+    <%= form.submit "Submit", class: "complete-sale-button" %>
+    <%= link_to reserve_or_purchases_path, class:"cancel-button", style:"  text-decoration: none" do %>
+      Back to reserve or purchases
+    <% end %>
+    
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reserve_or_purchase %>
+
+<div>
+  <%= link_to "Edit this reserve or purchase", edit_reserve_or_purchase_path(@reserve_or_purchase) %> |
+  <%= link_to "Back to reserve or purchases", reserve_or_purchases_path %>
+
+  <%= button_to "Destroy this reserve or purchase", @reserve_or_purchase, method: :delete %>
+</div>

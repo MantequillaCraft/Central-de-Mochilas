@@ -1,0 +1,171 @@
+<style>
+  /* Estilos específicos para reportes de ventas */
+  .reports-container {
+    padding: 20px;
+  }
+  
+  .reports-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+  }
+  
+  /* Estilos para las tarjetas de resumen */
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .summary-card {
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  
+  .summary-card h3 {
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+  }
+  
+  .summary-item {
+    margin: 0.5rem 0;
+    color: #2c3e50;
+  }
+  
+  /* Estilos para las tablas */
+  .sales-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+  }
+  
+  .sales-table th {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .sales-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    color: #2c3e50;
+  }
+  
+  .sales-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Estilos para los totales */
+  .total-column {
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  /* Estilos para secciones */
+  .report-section {
+    margin-bottom: 2.5rem;
+  }
+  
+  .report-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  
+  /* Estilos para cantidades monetarias */
+  .money {
+    font-family: monospace;
+    text-align: right;
+  }
+  
+  /* Estilos para fechas */
+  .date-column {
+    white-space: nowrap;
+  }
+
+</style>
+
+<div class="reports-container">
+        <h2 class="reports-title">Reportes de Ventas</h2>
+
+        <div class="summary-cards">
+            <!-- Resumen del Día -->
+            <div class="summary-card">
+              <h3>Resumen del Día (<%= Date.today.strftime('%d-%m-%Y') %>)</h3>                        
+              <div class="summary-item">
+                    <strong>Ingresos del día:</strong> $ <%= @sales_reports_today.sum(:daily_earnings)%>
+                </div>
+                <div class="summary-item">
+                    <strong>Productos vendidos hoy:</strong> <%= @sales_reports_today.sum(:products_sold_quantity)%>
+                </div>
+            </div>
+
+            <!-- Resumen Total -->
+            <div class="summary-card">
+                <h3>Resumen Total</h3>
+                <div class="summary-item">
+                    <strong>Ingresos totales:</strong> $ <%= @sales_reports.sum(:daily_earnings)%>
+                </div>
+                <div class="summary-item">
+                    <strong>Total productos vendidos:</strong> <%= @sales_reports.sum(:products_sold_quantity)%>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historial de Ventas -->
+        <div class="report-section">
+            <h3>Historial de Ventas</h3>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @sales_reports.each do |report| %>
+                    <tr>
+                      <td><%= report.product.product_name %></td>
+                      <td><%= report.report_date %></td>
+                      <td><%= report.products_sold %></td>
+                      <td><%= report.products_sold_quantity %></td>
+                      <td><%= number_to_currency(report.daily_earnings) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Productos más Vendidos -->
+        <div class="report-section">
+            <h3>Productos más Vendidos</h3>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad Total Vendida</th>
+                        <th>Ingresos Generados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><%= @most_sold_product.product.product_name%></th>
+                        <th><%= @most_sold_product.total_quantity%></th>
+                        <th><%= number_to_currency(@most_sold_product.total_earnings) %></th>\
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

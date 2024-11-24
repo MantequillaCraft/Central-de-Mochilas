@@ -1,0 +1,36 @@
+
+
+<div id="<%= dom_id reserve_or_purchase %>">
+  <th>
+    <p>
+      <!--<strong>Desired quantity:</strong>-->
+      <%= reserve_or_purchase.created_at.strftime('%Y-%m-%d') %>
+    </p>
+  </th>
+  <th>
+    <p>
+      <!--<strong>Payment method:</strong>-->
+      <%= reserve_or_purchase.product.product_name %>
+    </p>  
+  </th>
+  <th>
+    <p>
+      <!--<strong>Product:</strong>-->
+      <%= reserve_or_purchase.desired_quantity%>
+    </p>
+  </th>
+  <th>
+    <p>
+      <!--<strong>Customer:</strong>-->
+      $<%= reserve_or_purchase.desired_quantity * reserve_or_purchase.product.unit_price%>
+    </p>
+  </th>
+  <th>
+    <p>
+      <!--<strong>Customer:</strong>-->
+      <%= reserve_or_purchase.customer.customer_name %>
+    </p>
+  </th>
+</div>
+
+

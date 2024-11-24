@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  daily_earnings: 1.5
+  products_sold_quantity: 1
+  products_sold: MyText
+  report_date: 2024-11-24
+
+two:
+  product: two
+  daily_earnings: 1.5
+  products_sold_quantity: 1
+  products_sold: MyText
+  report_date: 2024-11-24

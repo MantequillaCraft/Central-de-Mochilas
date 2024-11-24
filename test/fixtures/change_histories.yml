@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  modification_date: 2024-11-23
+  change_description: MyString
+  product: one
+
+two:
+  modification_date: 2024-11-23
+  change_description: MyString
+  product: two
