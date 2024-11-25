@@ -1,14 +1,138 @@
+<style>
+  /* Contenido principal */
+.content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.content-header h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.add-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Botones de acción */
+.edit-btn, .delete-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+    
+    .content {
+        padding: 1rem;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 0.75rem;
+    }
+}
+</style>
+
 <p style="color: green"><%= notice %></p>
 
-<h1>Customers</h1>
-
-<div id="customers">
-  <% @customers.each do |customer| %>
-    <%= render customer %>
-    <p>
-      <%= link_to "Show this customer", customer %>
-    </p>
+<div class="content-header">
+  <h1>Users</h1>
+ <%= link_to  new_user_path  do %>
+    <button class="add-btn">Agregar usuario</button>
   <% end %>
+
+</div>
+
+
+<table>
+  <thead>
+      <tr>
+          <th>Usuario</th>
+          <th>Rol</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @customers.each do |customer| %>
+  <tr>
+    <%= render customer %>
+    <th>
+      <%= link_to edit_customer_path(customer), class: "edit-btn", style:"text-decoration: none" do %>
+            Editar 
+          <% end %>
+           <%= button_to "Eliminar", customer, method: :delete, class:"delete-btn"%>
+    </th>
+  <% end %></tr>
+
+  </tbody>
+</table>
+<div id="customers">
+  
 </div>
 
 <%= link_to "New customer", new_customer_path %>

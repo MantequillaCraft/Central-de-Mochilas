@@ -104,9 +104,11 @@
     </tr>
   </thead>
   <tbody>
-  <tr>
+  
     <% @suppliers.each do |supplier| %>
-      <%= render supplier %>
+     <tr> <%= render supplier %>
+
+      
       <td>
         <%= link_to edit_product_path(supplier), class: "edit-btn", style:"text-decoration: none" do %>
             Editar 

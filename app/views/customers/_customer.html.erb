@@ -1,7 +1,15 @@
 <div id="<%= dom_id customer %>">
-  <p>
-    <strong>Customer name:</strong>
-    <%= customer.customer_name %>
-  </p>
+
+    <th><%= customer.customer_name %></th>
+    <th>
+      <% if customer.customer_name == "admin"%>
+        admin
+      <% else%>
+        usuario
+      <% end %>
+    </th>
+    <th>desconectado </th>
+    
+  
 
 </div>
